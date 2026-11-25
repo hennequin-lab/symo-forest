@@ -191,7 +191,8 @@
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
     if (link.target && link.target !== '_self') return false;
     if (link.hasAttribute('download')) return false;
-    return /^\/notes\/[^/]+\/$/.test(pathOf(link.getAttribute('href')));
+    const p = pathOf(link.getAttribute('href'));
+    return p.startsWith(BASE) && /^notes\/[^/]+\/$/.test(p.slice(BASE.length));
   }
 
   // A background pane is behind glass: clicking it brings it forward instead
