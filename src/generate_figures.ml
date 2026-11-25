@@ -151,7 +151,12 @@ let distinct m =
   done;
   Hashtbl.length seen
 
-let fig_theme = Hugin.Theme.v ~size:8.5 ~paper:Hugin.Color.transparent ~ink:Hugin.Color.black ()
+let fig_theme =
+  Hugin.Theme.v
+    ~size:11.
+    ~paper:Hugin.Color.transparent
+    ~ink:Hugin.Color.black
+    ()
 
 let postprocess_svg path =
   let raw = Stdlib.In_channel.with_open_bin path Stdlib.In_channel.input_all in
@@ -267,15 +272,15 @@ let () =
   in
   let fig1 =
     Hugin.grid
-      [ [ panel "(a) Trivial group {e} (78 entries)" s_id
-        ; panel "(b) Row permutations S3 (20 values)" s_s3
+      [ [ panel "(a) Trivial {e} (78 entries)" s_id
+        ; panel "(b) Row perm. S3 (20 values)" s_s3
         ]
-      ; [ panel "(c) Signed permutations B3 (10 values)" s_b3
-        ; panel "(d) Product group S3 × S4 (4 values)" s_s3x4
+      ; [ panel "(c) Signed perm. B3 (10 values)" s_b3
+        ; panel "(d) Product S3 × S4 (4 values)" s_s3x4
         ]
       ]
   in
-  save_fig ~w:580. ~h:560. "running_example_3x4.svg" fig1;
+  save_fig ~w:520. ~h:510. "running_example_3x4.svg" fig1;
 
   (* 2. Pi / Pi_perp basis & row mean-covariance identity *)
   (* Build orthogonal Helmert matrix Q in O(3): col 0 = 1/sqrt(3), cols 1,2 span 1^perp *)
@@ -309,12 +314,12 @@ let () =
     err_std;
   let fig2 =
     Hugin.grid
-      ~widths:[ 1.35; 1.35; 0.9; 0.9 ]
       [ [ bare_matrix ~rules:block_rules (heatmap ~domain:(-0.9, 0.9) s_s3)
           |> Hugin.title "(a) S in unit basis (12×12)"
         ; bare_matrix ~rules:block_rules (heatmap ~domain:(-0.9, 0.9) s_block_diag)
-          |> Hugin.title "(b) (Q(x)I)^T S (Q(x)I) = B_0 + B_[1] + B_[1]"
-        ; bare_matrix ~rules:(grid_rules ~width:0.35 [ 1; 2; 3 ])
+          |> Hugin.title "(b) Block-diagonal B_0 + B_[1] + B_[1]"
+        ]
+      ; [ bare_matrix ~rules:(grid_rules ~width:0.35 [ 1; 2; 3 ])
             (heatmap ~domain:(-0.9, 0.9) b_empty)
           |> Hugin.title "(c) B_0 = 3 c_bar c_bar^T (4×4)"
         ; bare_matrix ~rules:(grid_rules ~width:0.35 [ 1; 2; 3 ])
@@ -323,7 +328,7 @@ let () =
         ]
       ]
   in
-  save_fig ~w:780. ~h:300. "pi_perp_blocks_3x4.svg" fig2
+  save_fig ~w:520. ~h:570. "pi_perp_blocks_3x4.svg" fig2
 
 (* ------------------------------------------------------------------------
    Figure 3: Exact closed-form projection R2 vs Monte Carlo orbit sampling
@@ -379,20 +384,20 @@ let () =
   let p_left =
     bare_matrix ~rules:(grid_rules ~width:0.35 [ 4; 8; 12; 16; 20; 24; 28 ])
       (heatmap ~domain:(-1.2, 1.2) !sample_3)
-    |> Hugin.title "(a) Sample average (M = 3 draws)"
+    |> Hugin.title "(a) Sample average (M = 3)"
   in
   let p_mid =
     bare_matrix ~rules:(grid_rules ~width:0.35 [ 4; 8; 12; 16; 20; 24; 28 ])
       (heatmap ~domain:(-1.2, 1.2) exact)
-    |> Hugin.title "(b) Exact projection R2 (8! = 40,320)"
+    |> Hugin.title "(b) Exact R2 (8! = 40,320)"
   in
   let p_right =
     Hugin.layer
       [ Hugin.line
           ~x:(Hugin.num ~scale:(Hugin.Scale.log ~name:"mx" ()) ~title:"Monte Carlo samples M" m_floats)
-          ~y:(Hugin.num ~scale:(Hugin.Scale.log ~name:"my" ()) ~title:"relative Frobenius error" curves)
+          ~y:(Hugin.num ~scale:(Hugin.Scale.log ~name:"my" ()) ~title:"relative error" curves)
           ~stroke:(Hugin.dim ~scale:(Hugin.Scale.band ~name:"mc_cat" ()) ~labels 0)
-          ~width:(Hugin.const 1.5)
+          ~width:(Hugin.const 1.6)
           ()
       ; Hugin.dot
           ~x:(Hugin.num ~scale:(Hugin.Scale.log ~name:"mx" ()) m_floats)
@@ -403,13 +408,16 @@ let () =
       ; Hugin.axis ~grid:true "my"
       ; Hugin.legend ~side:(`Inside `Top_right) "mc_cat"
       ]
-    |> Hugin.title "(c) Monte Carlo error vs exact R2"
+    |> Hugin.title "(c) Monte Carlo convergence vs exact R2"
   in
   let fig3 =
-    Hugin.grid ~widths:[ 1.0; 1.0; 1.45 ] [ [ p_left; p_mid; p_right ] ]
-    |> Hugin.share [ "color", `Independent ]
+    Hugin.grid
+      ~heights:[ 1.15; 1.0 ]
+      [ [ p_left; p_mid ]
+      ; [ Hugin.span ~cols:2 p_right ]
+      ]
   in
-  save_fig ~w:760. ~h:300. "orbit_convergence_r1_r2.svg" fig3
+  save_fig ~w:520. ~h:570. "orbit_convergence_r1_r2.svg" fig3
 
 (* ------------------------------------------------------------------------
    Figure 4: Two-hidden-layer MLP parameter-tree mosaic (S_6 x S_5)
@@ -492,13 +500,13 @@ let () =
   let fig4 =
     Hugin.grid
       [ [ mosaic ~min_label_size:10 m_params Mlp2.leaves
-          |> Hugin.title "(a) MLP parameter orbit average R2(w, w)"
+          |> Hugin.title "(a) Parameters R2(w, w)"
         ; mosaic ~min_label_size:10 m_grads Mlp2.leaves
-          |> Hugin.title "(b) MLP gradient orbit average R2(g, g)"
+          |> Hugin.title "(b) Gradients R2(g, g)"
         ]
       ]
   in
-  save_fig ~w:680. ~h:380. "mlp_tree_mosaic.svg" fig4
+  save_fig ~w:530. ~h:340. "mlp_tree_mosaic.svg" fig4
 
 (* ------------------------------------------------------------------------
    Figure 5: 7-leaf MLP-step RNN mosaic (G_h x G_z = S_8 x S_6)
@@ -609,13 +617,13 @@ let () =
   let fig5 =
     Hugin.grid
       [ [ mosaic ~min_label_size:18 m_params Rnn_mlp.leaves
-          |> Hugin.title "(a) RNN parameter mosaic R2(w, w)"
+          |> Hugin.title "(a) RNN parameters R2(w, w)"
         ; mosaic ~min_label_size:18 m_grads Rnn_mlp.leaves
-          |> Hugin.title "(b) RNN gradient mosaic R2(g, g)"
+          |> Hugin.title "(b) RNN gradients R2(g, g)"
         ]
       ]
   in
-  save_fig ~w:680. ~h:380. "rnn_mlp_mosaic.svg" fig5
+  save_fig ~w:530. ~h:340. "rnn_mlp_mosaic.svg" fig5
 
 (* ------------------------------------------------------------------------
    Figure 6: Vanilla RNN (k = 2): Bell(4) = 15 patterns & 11 symmetric values
@@ -763,18 +771,18 @@ let () =
   let p_patterns =
     bare_matrix
       ~rules:sub_rules
-      ~labels:[ Hugin.legend ~side:`Bottom ~ncol:8 "pat15" ]
+      ~labels:[ Hugin.legend ~side:`Bottom ~ncol:5 "pat15" ]
       (cells n2 (Hugin.cat ~labels ~scale:band code_tensor))
-    |> Hugin.title "(a) The B4 = 15 four-index partition classes"
+    |> Hugin.title "(a) B4 = 15 partition classes"
   in
   let p_values =
     bare_matrix ~rules:sub_rules (heatmap ~scale_name:"val15" ~domain:(-0.3, 0.3) block)
-    |> Hugin.title "(b) Actual gradient orbit average (11 levels)"
+    |> Hugin.title "(b) Gradient average (11 levels)"
   in
   let fig6 =
     Hugin.grid [ [ p_patterns; p_values ] ]
   in
-  save_fig ~w:680. ~h:430. "vanilla_rnn_15_patterns.svg" fig6
+  save_fig ~w:530. ~h:390. "vanilla_rnn_15_patterns.svg" fig6
 
 (* ------------------------------------------------------------------------
    Figure 7: Gated Recurrent Unit (GRU) mosaic & 15-value cross-gate tile
@@ -902,15 +910,15 @@ let () =
   let cross_rules = grid_rules ~width:0.3 [ 6; 12; 18; 24; 30 ] in
   let fig7 =
     Hugin.grid
-      ~widths:[ 1.25; 1.0 ]
+      ~widths:[ 1.1; 1.0 ]
       [ [ mosaic ~domain:(-0.3, 0.3) ~min_label_size:12 m_gru Gru.leaves
-          |> Hugin.title "(a) Full 10-leaf GRU gradient mosaic (174×174)"
+          |> Hugin.title "(a) 10-leaf GRU mosaic (174×174)"
         ; bare_matrix ~rules:cross_rules (heatmap ~domain:(-0.3, 0.3) wr_wh_cross)
-          |> Hugin.title "(b) Cross-gate tile R2(Wr, Wh): all B4 = 15 values"
+          |> Hugin.title "(b) Cross-gate R2(Wr, Wh)"
         ]
       ]
   in
-  save_fig ~w:680. ~h:380. "gru_mosaic.svg" fig7
+  save_fig ~w:540. ~h:340. "gru_mosaic.svg" fig7
 
 (* ------------------------------------------------------------------------
    Figure 8: The 7 canonical test vectors for k = 2 (n = 6) & block spectrum
@@ -924,9 +932,9 @@ let () =
      ; "z_{0,1} (Π_perp)"
      ; "z_{[1],0} (h1^T)"
      ; "z_{[1],1} (1h^T)"
-     ; "z_{[1],2} (Diag_perp(h))"
+     ; "z_{[1],2} (Diag)"
      ; "z_{[2],0} (4-cycle)"
-     ; "z_{[1,1],0} (e01−e10)"
+     ; "z_{[1,1],0} (skew)"
     |]
   in
   let r6 = grid_rules ~width:0.25 [ 1; 2; 3; 4; 5 ] in
@@ -947,11 +955,12 @@ let () =
     !max_off_gram;
   let fig8 =
     Hugin.grid
-      [ List.sub tv_panels ~pos:0 ~len:4
-      ; List.sub tv_panels ~pos:4 ~len:3 @ [ Hugin.layer [] ]
+      [ List.sub tv_panels ~pos:0 ~len:3
+      ; List.sub tv_panels ~pos:3 ~len:3
+      ; List.sub tv_panels ~pos:6 ~len:1 @ [ Hugin.layer []; Hugin.layer [] ]
       ]
   in
-  save_fig ~w:720. ~h:440. "test_vectors_and_blocks_k2.svg" fig8
+  save_fig ~w:530. ~h:570. "test_vectors_and_blocks_k2.svg" fig8
 
 (* ------------------------------------------------------------------------
    Figure 9: Exact width transport vs naive fixed-coordinate surrogate (k = 2)
@@ -1040,45 +1049,45 @@ let () =
   let t_naive = flat_2d eigs_naive in
   let t_mults = flat_2d mults_by_eig in
   let eig_labels =
-    [| "B_[1,1] (1x1, d=(n-1)(n-2)/2)"
-     ; "B_[2] (1x1, d=n(n-3)/2)"
-     ; "B_0 eig 1 (2x2, d=1)"
-     ; "B_0 eig 2 (2x2, d=1)"
-     ; "B_[1] eig 1 (3x3, d=n-1)"
-     ; "B_[1] eig 2 (3x3, d=n-1)"
-     ; "B_[1] eig 3 (3x3, d=n-1)"
+    [| "B_[1,1] (1×1)"
+     ; "B_[2] (1×1)"
+     ; "B_0 eig 1 (2×2)"
+     ; "B_0 eig 2 (2×2)"
+     ; "B_[1] eig 1 (3×3)"
+     ; "B_[1] eig 2 (3×3)"
+     ; "B_[1] eig 3 (3×3)"
     |]
   in
   let y_scale name = Hugin.Scale.linear ~name ~domain:(-5.2, 6.2) () in
   let sz_scale = Hugin.Scale.linear ~name:"mult_sz" ~domain:(1., 55.) ~areas:(20., 220.) () in
-  let panel_lines y_name title_str y_tensor =
+  let panel_lines ~with_legend y_name title_str y_tensor =
     Hugin.layer
-      [ Hugin.line
-          ~x:(Hugin.num ~title:"permuted width n" w_tensor)
-          ~y:(Hugin.num ~scale:(y_scale y_name) ~title:"block eigenvalue" y_tensor)
-          ~stroke:(Hugin.dim ~title:"block eigenvalue (by kind)" ~labels:eig_labels 0)
-          ~width:(Hugin.const 1.5)
-          ()
-      ; Hugin.dot
-          ~x:(Hugin.num w_tensor)
-          ~y:(Hugin.num ~scale:(y_scale y_name) y_tensor)
-          ~fill:(Hugin.dim ~labels:eig_labels 0)
-          ~size:(Hugin.num ~scale:sz_scale ~title:"multiplicity d_λ(n)" t_mults)
-          ~opacity:(Hugin.const 0.85)
-          ()
-      ; Hugin.axis ~grid:true "x"
-      ; Hugin.axis ~grid:true y_name
-      ]
+      ([ Hugin.line
+           ~x:(Hugin.num ~title:"permuted width n" w_tensor)
+           ~y:(Hugin.num ~scale:(y_scale y_name) ~title:"block eigenvalue" y_tensor)
+           ~stroke:(Hugin.dim ~title:"block eigenvalue" ~labels:eig_labels 0)
+           ~width:(Hugin.const 1.6)
+           ()
+       ; Hugin.dot
+           ~x:(Hugin.num w_tensor)
+           ~y:(Hugin.num ~scale:(y_scale y_name) y_tensor)
+           ~fill:(Hugin.dim ~labels:eig_labels 0)
+           ~size:(Hugin.num ~scale:sz_scale ~title:"d_λ(n)" t_mults)
+           ~opacity:(Hugin.const 0.85)
+           ()
+       ; Hugin.axis ~grid:true "x"
+       ; Hugin.axis ~grid:true y_name
+       ]
+       @ if with_legend then [ Hugin.legend ~side:`Bottom ~ncol:3 "color" ] else [])
     |> Hugin.title title_str
   in
   let fig9 =
     Hugin.grid
-      [ [ panel_lines "yt" "(a) Exact transport τ_{5->n}(c5): eigenvalues flat, areas = d_λ(n)" t_trans
-        ; panel_lines "yn" "(b) Naive fixed coordinates c_n = c5: B_0 and B_[1] eigenvalues drift" t_naive
-        ]
+      [ [ panel_lines ~with_legend:false "yt" "(a) Exact transport τ_{5->n}(c5): spectrum flat" t_trans ]
+      ; [ panel_lines ~with_legend:true "yn" "(b) Naive fixed coordinates c_n = c5: spectrum drifts" t_naive ]
       ]
   in
-  save_fig ~w:940. ~h:360. "transport_vs_naive_surrogate.svg" fig9
+  save_fig ~w:520. ~h:590. "transport_vs_naive_surrogate.svg" fig9
 
 (* ------------------------------------------------------------------------
    Figure 10: Eigenvalue spectra & carrier multiplicities (symbol area = d_lambda)
@@ -1288,7 +1297,7 @@ let () =
 
   let p_spec_w =
     spectrum_panel
-      ~panel_title:"(a) Vanilla RNN W (D=64, 7 block eigs)"
+      ~panel_title:"(a) Vanilla RNN W (D=64, 7 block eigenvalues)"
       ~y_name:"yw"
       ~cat_name:"cw"
       ~sz_name:"mult_size"
@@ -1299,7 +1308,7 @@ let () =
   in
   let p_spec_r =
     spectrum_panel
-      ~panel_title:"(b) MLP-step RNN tree (D=142, 24 block eigs)"
+      ~panel_title:"(b) 7-leaf MLP-step RNN tree (D=142, 24 block eigenvalues)"
       ~y_name:"yr"
       ~cat_name:"cr"
       ~sz_name:"mult_size"
@@ -1310,7 +1319,7 @@ let () =
   in
   let p_spec_g =
     spectrum_panel
-      ~panel_title:"(c) 10-leaf GRU tree (D=174, 43 block eigs)"
+      ~panel_title:"(c) 10-leaf GRU tree (D=174, 43 block eigenvalues)"
       ~y_name:"yg"
       ~cat_name:"cg"
       ~sz_name:"mult_size"
@@ -1320,6 +1329,10 @@ let () =
       items_g
   in
   let fig10 =
-    Hugin.grid [ [ p_spec_w; p_spec_r; p_spec_g ] ]
+    Hugin.grid
+      [ [ p_spec_w ]
+      ; [ p_spec_r ]
+      ; [ p_spec_g ]
+      ]
   in
-  save_fig ~w:860. ~h:360. "wedderburn_spectra_multiplicity.svg" fig10
+  save_fig ~w:540. ~h:860. "wedderburn_spectra_multiplicity.svg" fig10
