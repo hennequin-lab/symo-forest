@@ -1,0 +1,16 @@
+(version dev)
+
+(build
+ (all_platforms
+  ((action
+    (run dune build -p %{pkg-self:name} -j %{jobs} %{pkg-self:name}.install)))))
+
+(depends
+ (all_platforms
+  (ocaml dune)))
+
+(source
+ (fetch
+  (url file:///home/hennequi/code/modern/murder)))
+
+(dev)

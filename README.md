@@ -1,12 +1,12 @@
 # Orbit averages and the commutant algebra — a symo forest
 
-An [EG](https://github.com/hennequin-lab/eg) vault of 40 atomic notes on
-weight-space permutation symmetries, exact orbit projections, the partition and
-commutant algebras, the Wedderburn isotypic decomposition, canonical test
-vectors, block functional calculus, and width transport — the algebraic
-foundation of Artemev et al., *Exploiting weight-space symmetries for
-approximating curvature* (ICML 2026) and its OCaml implementation `symo`
-(`murder/packages/symo`).
+An [EG](https://github.com/hennequin-lab/eg) vault of 41 atomic notes and 10
+vector [Hugin](https://github.com/raven-ml/raven) figures on weight-space
+permutation symmetries, exact orbit projections, the partition and commutant
+algebras, the Wedderburn isotypic decomposition, canonical test vectors, block
+functional calculus, and width transport — the algebraic foundation of Artemev
+et al., *Exploiting weight-space symmetries for approximating curvature*
+(ICML 2026) and its OCaml implementation `symo` (`murder/packages/symo`).
 
 Published at <https://hennequin-lab.github.io/symo-forest/>.
 
@@ -26,7 +26,24 @@ eg build --vault .
 ```
 
 Start at **Orbit averages and the commutant algebra — map of the vault**
-(`54900ffe`).
+(`54900ffe`), or browse all ten visuals in **Gallery of orbit-average figures**
+(`8f5747b6`).
+
+## Regenerating the Hugin figures (`src/`)
+
+`src/` is a standalone OCaml project using Dune package management (`dune.lock`,
+pinning `murder`'s `symo` and `cmdargs` and inheriting `raven`'s `nx`, `rune`,
+`hugin`, and `ppx_ptree`). To regenerate `figures/*.svg` and run the numerical
+verifications:
+
+```sh
+cd src && dune exec ./generate_figures.exe -- -d ../figures
+eg build --full --vault .
+```
+
+Every figure is generated as a vector SVG with transparent paper and
+`currentColor` ink; `eg build` inlines local `.svg` figures directly into the
+note pages so they adapt live to both the dark and light themes.
 
 ## Publishing
 
@@ -37,7 +54,7 @@ which `eg build` uses for all internal URLs, and on every push to `main`
 
 ## Structure of the forest
 
-One map note and six trails:
+One map note, one figure gallery, and six trails:
 
 1. **Weight-space symmetries and orbit projections** (`9a072006`) — Kronecker
    actions on parameter leaves, orthogonal representations, $cal(S)_n$ and

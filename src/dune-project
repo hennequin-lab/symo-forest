@@ -1,0 +1,30 @@
+(lang dune 3.24)
+
+(name symo_forest_figures)
+
+(implicit_transitive_deps false)
+
+(pin
+ (url "../../murder")
+ (package
+  (name symo))
+ (package
+  (name cmdargs)))
+
+(package
+ (name symo_forest_figures)
+ (allow_empty)
+ (synopsis "Hugin figure generators and orbit-averaging examples for symo-forest")
+ (depends
+  (ocaml
+   (>= 5.5.0))
+  dune
+  base
+  stdio
+  cmdargs
+  nx
+  rune
+  hugin
+  symo
+  ppx_ptree
+  ppx_sexp_conv))

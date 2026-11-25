@@ -11,6 +11,7 @@ const notes = [{"id":"688fb137","title":"Architectural equivariance versus objec
 {"id":"593dad00","title":"Finite and continuous weight-space symmetry groups","url":"/symo-forest/notes/593dad00/","tags":["symmetry"],"aliases":["list of symmetries","symmetry examples"]},
 {"id":"273c28e5","title":"First and second moments of a random permutation matrix","url":"/symo-forest/notes/273c28e5/","tags":["algebra"],"aliases":["second order permutation average","E[P⊗P]","permutation moments"]},
 {"id":"6b12a533","title":"Function invariance implies gradient equivariance","url":"/symo-forest/notes/6b12a533/","tags":["symmetry"],"aliases":["equivariance","gradient symmetry","orbit level set"]},
+{"id":"8f5747b6","title":"Gallery of orbit-average figures","url":"/symo-forest/notes/8f5747b6/","tags":["meta"],"aliases":["figure gallery","gallery","visuals"]},
 {"id":"b2ecabc3","title":"Hidden-unit permutations act by Kronecker products on parameter tensors","url":"/symo-forest/notes/b2ecabc3/","tags":["symmetry"],"aliases":["unit permutation","hidden unit symmetry","permutation symmetry"]},
 {"id":"33d479c5","title":"Index invariance and the equality-pattern basis","url":"/symo-forest/notes/33d479c5/","tags":["algebra"],"aliases":["delta/1 structure","same or different","invariance constraint"]},
 {"id":"35cc480f","title":"Isotypic decomposition of V^⊗k under the symmetric group","url":"/symo-forest/notes/35cc480f/","tags":["algebra"],"aliases":["isotypic kinds","15 decomposition","multiplicity blocks","Fifteen = 2² + 3² + 1² + 1²"]},

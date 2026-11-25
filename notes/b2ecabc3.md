@@ -53,3 +53,5 @@ In the two-layer network above:
 - For $bold(b)_2 in RR^(d_"out")$: $k_4 = 0$ (no permuted axes) and $F_4 = RR^(d_"out")$ ($f_4 = d_"out"$).
 
 When a single group permutes both the rows and the columns of a square matrix $bold(W) in RR^(n times n)$ — as in [[c35dde47|a vanilla recurrent network]] where $bold(W) mapsto bold(P)_sigma bold(W) bold(P)_sigma^top$ — that leaf has $k = 2$ and $f = 1$, so $rho(sigma) = bold(P)_sigma ⊗ bold(P)_sigma$. The factorization $rho_i (sigma) = bold(P)_sigma^(⊗k_i) ⊗ bold(I)_(F_i)$ separates the group action on $V^(⊗k_i)$ from the trivial action on $F_i$, which is the structural premise of [[46af9ff5|the Wedderburn decomposition]] and [[dc31c6c2|declarative symmetry specifications in symo]].
+
+![Second-order orbit averages $cal(R)_2(bold(w), bold(w))$ and $cal(R)_2(bold(g), bold(g))$ for a two-hidden-layer MLP ($3 -> 6 -> 5 -> 2$, leaves $bold(W)_1, bold(b)_1, bold(W)_2, bold(b)_2, bold(W)_3$, $D = 69$) under $cal(S)_6 times cal(S)_5$, showing how the middle weight matrix $bold(W)_2$ (`[Perm 1; Perm 0]`) couples the two hidden-layer permutation groups.](figures/mlp_tree_mosaic.svg)

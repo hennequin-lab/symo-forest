@@ -1,0 +1,6 @@
+(executable
+ (name generate_figures)
+ (modules generate_figures)
+ (libraries base stdio cmdargs nx rune hugin symo)
+ (preprocess
+  (pps ppx_sexp_conv ppx_ptree)))

@@ -1584,6 +1584,37 @@ svg { max-width: 100%; height: auto; }
   color: currentColor;
   background: transparent;
 }
+.eg-figure {
+  margin: 1.5rem 0;
+  color: #e5e7eb;
+}
+html[data-theme="light"] .eg-figure {
+  color: #1f2937;
+}
+.eg-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  color: currentColor;
+  background: transparent;
+}
+.eg-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--color-gray-800, #1e2939);
+}
+.eg-figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-gray-400, #9ca3af);
+}
+html[data-theme="light"] .eg-figcaption {
+  color: var(--color-gray-600, #4b5563);
+}
 #search-input {
   -webkit-appearance: none;
   appearance: none;

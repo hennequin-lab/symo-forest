@@ -38,3 +38,5 @@ Thus the $cal(B)_n$-commutant for $k = 1$ collapses from two $f times f$ blocks 
 bold(S)_((m,n),(o,p)) = delta_(m o) bold(F)_(n p) <==> bold(S) = bold(I)_n ⊗ bold(F),
 ```
 Parameterized by one $f times f$ matrix ($f^2$ numbers). More generally, in the partition algebra on $V^(⊗k)$, invariance under ${plus.minus 1}^n$ retains precisely those set partitions in which every block has *even* cardinality, since $bb(E)_(bold(d))[product_(x in B) d_(i_x)] = 1$ if $|B|$ is even and $0$ if $|B|$ is odd. Compare the three symmetry regimes on the $3 times 4$ matrix in [[57bf40fa|the 3×4 worked example]].
+
+![Comparing panel (b) ($cal(S)_3$, dense off-diagonal blocks $bold(G)$) with panel (c) ($cal(B)_3$, sign-flip invariance annihilates $bold(G) = bold(0)$ leaving the block-diagonal $bold(I)_3 ⊗ bold(F)$).](figures/running_example_3x4.svg)
