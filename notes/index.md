@@ -9,7 +9,7 @@ aliases = ["54900ffe", "forest map", "orbit averaging overview", "start here"]
 
 # Orbit averages and the commutant algebra — map of the vault
 
-This vault is a self-contained mathematical and algorithmic treatment of **weight-space permutation symmetries, exact orbit averages, and the Wedderburn block coordinates of the commutant algebra**, following the algebraic core of Artemev et al. (ICML 2026) and its OCaml implementation in `symo` (`murder/packages/symo`).
+This vault is a self-contained mathematical and algorithmic treatment of **weight-space permutation symmetries, exact orbit averages, and the Wedderburn block coordinates of the commutant algebra**, following the algebraic core of Artemev et al. (ICML 2026) and its OCaml implementation [`symo`](https://github.com/hennequin-lab/murder/tree/main/packages/symo) in the [`murder`](https://github.com/hennequin-lab/murder) monorepo.
 
 ## The mathematical problem
 
@@ -54,4 +54,4 @@ Because $|cal(G)|$ grows factorially with layer width ($n!$), enumerating the gr
 - A. Artemev, R. Xia, B. M. Boyd, Y. Yu, F. Dangel, G. Hennequin, A. Bernacchia, *Exploiting weight-space symmetries for approximating curvature*, ICML 2026 (`arXiv:2606.00442`).
 - T. Halverson, A. Ram, *Partition algebras*, European Journal of Combinatorics 26 (2005), 869–921.
 - H. Maron, H. Ben-Hamu, N. Shamir, Y. Lipman, *Invariant and equivariant graph networks*, ICLR 2019.
-- Companion note and source code: `murder/packages/symo/doc/transport.typ` and `murder/packages/symo/lib/`.
+- Companion note and source code in the [`murder` monorepo](https://github.com/hennequin-lab/murder): [`packages/symo/doc/transport.typ`](https://github.com/hennequin-lab/murder/blob/main/packages/symo/doc/transport.typ) and [`packages/symo/lib/`](https://github.com/hennequin-lab/murder/tree/main/packages/symo/lib).
