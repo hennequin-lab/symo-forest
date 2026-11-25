@@ -23,4 +23,4 @@ This trail constructs the exact linear dictionary $bold(Phi)_n : bold(c) mapsto 
 - [[be071dc0|Transporting invariant operators across widths]] — definition of $tau_(n -> n') = bold(Phi)_(n')^(-1) compose bold(Phi)_n$, proof that transport preserves blocks, distinct eigenvalues, and analytic functions, and exact formulas for multiplicity-dependent quantities ($op("tr")$, $det$, $op("rank")$, $norm(dot)_F$).
 - [[3862bdb6|Why evaluating fixed factor coordinates at a surrogate width changes the operator]] — quantitative comparison showing why holding diagram coordinates $bold(c)$ fixed while changing $n$ alters the blocks $bold(B)_lambda$ and shifts the spectrum for $k >= 2$.
 
-The realization of these algorithms in OCaml is described in [[07ef8651|The symo compiler and orbit architecture]]. Return to the [[54900ffe|map of the vault]].
+The realization of these algorithms in OCaml is described in [[07ef8651|The symo compiler and orbit architecture]]. Return to the [[index|map of the vault]].

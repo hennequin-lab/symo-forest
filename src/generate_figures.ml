@@ -78,8 +78,7 @@ let heatmap_2d ?(scale_name = "color") ?(domain = (-0.35, 0.35)) m =
       ~name:scale_name
       ~domain
       ~clamp:true
-      ~scheme:Hugin.Scheme.rdbu
-      ~reverse:true
+      ~scheme:(Hugin.Scheme.reverse Hugin.Scheme.rdbu)
       ()
   in
   cells_2d rows cols (Hugin.num ~scale m)

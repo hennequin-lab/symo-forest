@@ -1,10 +1,10 @@
 +++
-id = "54900ffe"
+id = "index"
 title = "Orbit averages and the commutant algebra — map of the vault"
 created = 2026-11-12T09:21:46Z
 updated = 2026-11-12T09:21:46Z
 tags = ["meta"]
-aliases = ["forest map", "orbit averaging overview", "start here"]
+aliases = ["54900ffe", "forest map", "orbit averaging overview", "start here"]
 +++
 
 # Orbit averages and the commutant algebra — map of the vault

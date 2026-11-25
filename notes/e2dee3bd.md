@@ -20,4 +20,4 @@ To diagonalize $bold(S)$, compute analytic matrix functions $f(bold(S))$, or tra
 - [[b50cfe81|Semisimplicity of the partition algebra and the stable range n ≥ 2k]] — why the partition algebra $P_k (n)$ is semisimple and its $B_(2k)$ diagram tensors are linearly independent if and only if $n >= 2k$, and what degenerates below this threshold.
 - [[a575e53a|Product kinds across multiple groups and block assembly over parameter trees]] — how independent symmetry groups form tuple kinds $bold(lambda) = (lambda^((1)), dots, lambda^((G)))$ with multiplied multiplicities, and how `Orbit.Second_order.blocks_of_factors` assembles per-pair blocks across a parameter tree $W = ⊕_i W_i$.
 
-The explicit conversion between diagram factor coordinates and Wedderburn blocks via canonical test vectors is developed in [[38beecad|Test vectors, block functional calculus, and width transport]]. Return to the [[54900ffe|map of the vault]].
+The explicit conversion between diagram factor coordinates and Wedderburn blocks via canonical test vectors is developed in [[38beecad|Test vectors, block functional calculus, and width transport]]. Return to the [[index|map of the vault]].
