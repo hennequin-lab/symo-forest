@@ -1,0 +1,5 @@
+# build caches
+.eg/cache/
+
+# editor / OS noise
+.DS_Store
