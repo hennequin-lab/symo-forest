@@ -5,8 +5,9 @@ vector [Hugin](https://github.com/raven-ml/raven) figures on weight-space
 permutation symmetries, exact orbit projections, the partition and commutant
 algebras, the Wedderburn isotypic decomposition, canonical test vectors, block
 functional calculus, and width transport — the algebraic foundation of Artemev
-et al., *Exploiting weight-space symmetries for approximating curvature*
-(ICML 2026) and its OCaml implementation `symo` (`murder/packages/symo`).
+et al., [*Exploiting weight-space symmetries for approximating curvature*](https://openreview.net/pdf?id=yiq2tZojBK)
+(ICML 2026) and its OCaml implementation [`symo`](https://github.com/hennequin-lab/murder/tree/main/packages/symo)
+in the [`murder`](https://github.com/hennequin-lab/murder) monorepo.
 
 Published at <https://hennequin-lab.github.io/symo-forest/>.
 
